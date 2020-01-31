@@ -16,24 +16,6 @@ app.set("port", process.env.PORT || port);
 MongoClient.connect(uri, (err, database) => {
   if (err) throw err;
 
-  // const myobj = [
-  //   { _id: 1, title: "Google", url: "http://www.google.com" },
-  //   { _id: 2, title: "Bing", url: "http://www.bing.com" }
-  // ];
-  // database.collection("links").insertMany(myobj, (err, res) => {
-  //   if (err) throw err;
-  //   console.log(res);
-  // });
-
-  // database
-  //   .collection("links")
-  //   .find({})
-  //   .toArray((err, links) => {
-  //     if (err) throw err;
-  //     console.log(links);
-  //     database.close();
-  //   });
-
   db = database.db("rgrjs");
   app.listen(port, () => console.log(`Listening on port ${port}`));
 });
