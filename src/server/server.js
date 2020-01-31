@@ -3,7 +3,7 @@ import cors from "cors";
 import GraphQLHTTP from "express-graphql";
 import { MongoClient } from "mongodb";
 
-import schema from "./data/schema";
+import Schema from "./data/schema";
 
 const port = 8080;
 const uri =
@@ -14,27 +14,19 @@ let app = express();
 
 app.set("port", process.env.PORT || port);
 app.use(cors());
-app.use(
-  "/graphql",
-  GraphQLHTTP({
-    schema,
-    graphiql: true
-  })
-);
 
 MongoClient.connect(uri, (err, database) => {
   if (err) throw err;
 
   db = database.db("rgrjs");
+
+  app.use(
+    "/graphql",
+    GraphQLHTTP({
+      schema: Schema(db),
+      graphiql: true
+    })
+  );
+
   app.listen(port, () => console.log(`Listening on port ${port}`));
-});
-
-app.get("/data/links", (req, res) => {
-  db.collection("links")
-    .find({})
-    .toArray((err, links) => {
-      if (err) throw err;
-
-      res.json(links);
-    });
 });

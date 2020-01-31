@@ -5,9 +5,13 @@ export const Main = () => {
   const [links, setLinks] = useState([]);
 
   useEffect(() => {
-    getLinks().then(res => {
-      setLinks(res.data);
-    });
+    getLinks()
+      .then(res => {
+        setLinks(res.data.data.links);
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }, []);
 
   return (
