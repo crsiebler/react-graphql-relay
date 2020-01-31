@@ -1,7 +1,9 @@
 import express from "express";
 import cors from "cors";
-
+import GraphQLHTTP from "express-graphql";
 import { MongoClient } from "mongodb";
+
+import schema from "./data/schema";
 
 const port = 8080;
 const uri =
@@ -10,8 +12,15 @@ const uri =
 let db;
 let app = express();
 
-app.use(cors());
 app.set("port", process.env.PORT || port);
+app.use(cors());
+app.use(
+  "/graphql",
+  GraphQLHTTP({
+    schema,
+    graphiql: true
+  })
+);
 
 MongoClient.connect(uri, (err, database) => {
   if (err) throw err;
