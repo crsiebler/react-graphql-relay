@@ -28,7 +28,7 @@ node_modules
 
 # Build folder
 build
-server/dist
+dist
 
 # Webstorm metadata
 .idea
