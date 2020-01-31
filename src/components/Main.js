@@ -1,13 +1,15 @@
-import React from "react";
-// import Server from "../api";
-// import LinkStore from "../stores/LinkStore";
-
-// let _getAppState = () => {
-//   return { links: LinkStore.getAll() };
-// };
+import React, { useEffect, useState } from "react";
+import { getLinks } from "../api/links";
 
 export const Main = () => {
-  const links = [];
+  const [links, setLinks] = useState([]);
+
+  useEffect(() => {
+    getLinks().then(res => {
+      setLinks(res.data);
+    });
+  }, []);
+
   return (
     <div>
       <h3>Links</h3>

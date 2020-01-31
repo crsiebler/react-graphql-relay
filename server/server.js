@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 
 import { MongoClient } from "mongodb";
 
@@ -9,6 +10,7 @@ const uri =
 let db;
 let app = express();
 
+app.use(cors());
 app.set("port", process.env.PORT || port);
 
 MongoClient.connect(uri, (err, database) => {
