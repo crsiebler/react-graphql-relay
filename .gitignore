@@ -38,3 +38,7 @@ dist
 
 # Visual Studio Code
 .vscode
+
+# Relay Compiled Files
+__generated__
+__mocks__
