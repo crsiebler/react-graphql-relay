@@ -4,9 +4,10 @@
   "description": "A collection of educational resources about React, GraphQL, and Relay",
   "scripts": {
     "build": "babel src/server -d dist",
+    "relay": "relay-compiler --src ./src --schema ./data/schema.json",
     "start": "run-p start:dev start:api",
     "start:dev": "webpack-dev-server --config webpack.config.dev.js --port 3000",
-    "start:api": "nodemon --ext js --exec babel-node src/server/server.js"
+    "start:api": "nodemon --ext js --exec babel-node server/server.js"
   },
   "repository": {
     "type": "git",
@@ -35,6 +36,7 @@
     "axios": "^0.19.2",
     "babel-eslint": "^10.0.3",
     "babel-loader": "^8.0.6",
+    "babel-plugin-relay": "^8.0.0",
     "cors": "^2.8.5",
     "eslint": "^6.8.0",
     "eslint-loader": "^3.0.3",
@@ -52,6 +54,8 @@
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-relay": "^8.0.0",
+    "relay-compiler": "^8.0.0",
+    "relay-config": "^8.0.0",
     "webpack": "^4.41.5",
     "webpack-bundle-analyzer": "^3.6.0",
     "webpack-cli": "^3.3.10",

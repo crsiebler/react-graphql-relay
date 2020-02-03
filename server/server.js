@@ -6,11 +6,11 @@ import { MongoClient } from "mongodb";
 import { graphql } from "graphql";
 import { introspectionQuery } from "graphql/utilities";
 
-import Schema from "./schema";
+import { Schema } from "./schema";
 
 const port = 8080;
 const uri =
-  "mongodb://rgrjs:S601MvkvSORXPTeO@rgrjs-shard-00-00-5xcvx.mongodb.net:27017,rgrjs-shard-00-01-5xcvx.mongodb.net:27017,rgrjs-shard-00-02-5xcvx.mongodb.net:27017/rgrjs?ssl=true&replicaSet=rgrjs-shard-0&authSource=admin&retryWrites=true&w=majority";
+  "mongodb://rgrjs:S601MvkvSORXPTeO@rgrjs-shard-00-00-5xcvx.mongodb.net:27017,rgrjs-shard-00-01-5xcvx.mongodb.net:27017,rgrjs-shard-00-02-5xcvx.mongodb.net:27017/rgrjs?ssl=true&replicaSet=rgrjs-shard-0&authSource=admin&retryWrites=true&w=majority"; // cspell:disable-line
 
 let app = express();
 

@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
+import { graphql } from "react-relay";
+
 import { getLinks } from "../api/links";
 
 export const Main = limit => {
@@ -36,5 +38,15 @@ Main.propTypes = {
 Main.defaultProps = {
   limit: 4
 };
+
+console.log(
+  graphql`
+    query MainQuery {
+      links {
+        title
+      }
+    }
+  `
+);
 
 export default Main;
