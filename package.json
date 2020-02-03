@@ -3,11 +3,10 @@
   "version": "1.0.0",
   "description": "A collection of educational resources about React, GraphQL, and Relay",
   "scripts": {
-    "build": "babel src/server --out-dir dist",
+    "build": "babel src/server -d dist",
     "start": "run-p start:dev start:api",
     "start:dev": "webpack-dev-server --config webpack.config.dev.js --port 3000",
-    "start:api": "nodemon --exec babel-node src/server/server.js",
-    "serve": "node dist/server.js"
+    "start:api": "nodemon --ext js --exec babel-node src/server/server.js"
   },
   "repository": {
     "type": "git",
