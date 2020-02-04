@@ -5,7 +5,7 @@
   "scripts": {
     "build": "babel src/server -d dist",
     "relay": "relay-compiler --src ./src --schema ./data/schema.json",
-    "start": "run-p start:dev start:api",
+    "start": "run-p  start:api start:dev",
     "start:dev": "webpack-dev-server --config webpack.config.dev.js --port 3000",
     "prestart:dev": "npm run relay",
     "start:api": "nodemon --ext js --exec babel-node server/server.js"
