@@ -13,7 +13,7 @@ const Links = props => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    if (input.title.length() > 0 && input.url.length() > 0) {
+    if (input.title.length > 0 && input.url.length > 0) {
       commitMutation(environment, {
         mutation: graphql`
           mutation LinksMutation($input: CreateLinkInput!) {
