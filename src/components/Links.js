@@ -59,12 +59,14 @@ const Links = props => {
           id="title"
           type="text"
           placeholder="Title"
+          value={input.title}
           onChange={handleInputChange}
         />
         <input
           id="url"
           type="text"
           placeholder="URL"
+          value={input.url}
           onChange={handleInputChange}
         />
         <button type="submit">Add</button>
