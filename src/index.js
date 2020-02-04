@@ -11,7 +11,7 @@ ReactDOM.render(
     query={graphql`
       query srcQuery {
         store {
-          ...Main_store
+          ...Main_store @arguments(limit: 3)
         }
       }
     `}

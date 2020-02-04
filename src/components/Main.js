@@ -2,16 +2,17 @@ import React from "react";
 import PropTypes from "prop-types";
 import { createFragmentContainer, graphql } from "react-relay";
 
+import Link from "./Link";
+
 const Main = props => {
-  const { store, limit } = props;
+  const { store } = props;
+  console.log(store);
   return (
     <div>
       <h3>Links</h3>
       <ul>
-        {store.links.slice(0, limit).map(link => (
-          <li key={link._id}>
-            <a href={link.url}>{link.title}</a>
-          </li>
+        {store.linkConnection.edges.map(edge => (
+          <Link key={edge.node.id} link={edge.node} />
         ))}
       </ul>
     </div>
@@ -19,21 +20,20 @@ const Main = props => {
 };
 
 Main.propTypes = {
-  limit: PropTypes.number,
   store: PropTypes.object.isRequired
-};
-
-Main.defaultProps = {
-  limit: 4
 };
 
 export default createFragmentContainer(Main, {
   store: graphql`
-    fragment Main_store on Store {
-      links {
-        _id
-        title
-        url
+    fragment Main_store on Store
+      @argumentDefinitions(limit: { type: "Int", defaultValue: 1 }) {
+      linkConnection(first: $limit) {
+        edges {
+          node {
+            id
+            ...Link_link
+          }
+        }
       }
     }
   `
