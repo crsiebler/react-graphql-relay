@@ -7,6 +7,7 @@
     "relay": "relay-compiler --src ./src --schema ./data/schema.json",
     "start": "run-p start:dev start:api",
     "start:dev": "webpack-dev-server --config webpack.config.dev.js --port 3000",
+    "prestart:dev": "npm run relay",
     "start:api": "nodemon --ext js --exec babel-node server/server.js"
   },
   "repository": {
@@ -56,6 +57,7 @@
     "react-relay": "^8.0.0",
     "relay-compiler": "^8.0.0",
     "relay-config": "^8.0.0",
+    "relay-runtime": "^8.0.0",
     "webpack": "^4.41.5",
     "webpack-bundle-analyzer": "^3.6.0",
     "webpack-cli": "^3.3.10",

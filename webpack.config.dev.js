@@ -9,7 +9,7 @@ module.exports = {
   devtool: "cheap-module-source-map",
   entry: "./src/index",
   output: {
-    path: path.resolve(__dirname, "build"),
+    path: path.resolve(__dirname, "public"),
     publicPath: "/",
     filename: "bundle.js"
   },

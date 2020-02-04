@@ -1,27 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import { graphql } from "react-relay";
+import { createFragmentContainer, graphql } from "react-relay";
 
-import { getLinks } from "../api/links";
-
-export const Main = limit => {
-  const [links, setLinks] = useState([]);
-
-  useEffect(() => {
-    getLinks()
-      .then(res => {
-        setLinks(res.data.data.links);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }, []);
-
+const Main = props => {
+  const { store, limit } = props;
   return (
     <div>
       <h3>Links</h3>
       <ul>
-        {links.slice(0, limit).map(link => (
+        {store.links.slice(0, limit).map(link => (
           <li key={link._id}>
             <a href={link.url}>{link.title}</a>
           </li>
@@ -32,21 +19,22 @@ export const Main = limit => {
 };
 
 Main.propTypes = {
-  limit: PropTypes.number
+  limit: PropTypes.number,
+  store: PropTypes.object.isRequired
 };
 
 Main.defaultProps = {
   limit: 4
 };
 
-console.log(
-  graphql`
-    query MainQuery {
+export default createFragmentContainer(Main, {
+  store: graphql`
+    fragment Main_store on Store {
       links {
+        _id
         title
+        url
       }
     }
   `
-);
-
-export default Main;
+});
