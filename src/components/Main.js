@@ -1,40 +1,38 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { createFragmentContainer, graphql } from "react-relay";
+import { QueryRenderer, graphql } from "react-relay";
 
-import Link from "./Link";
+import environment from "../lib/createRelayEnvironment";
 
-const Main = props => {
-  const { store } = props;
-  console.log(store);
-  return (
-    <div>
-      <h3>Links</h3>
-      <ul>
-        {store.linkConnection.edges.map(edge => (
-          <Link key={edge.node.id} link={edge.node} />
-        ))}
-      </ul>
-    </div>
-  );
-};
+import Links from "./Links";
 
-Main.propTypes = {
-  store: PropTypes.object.isRequired
-};
-
-export default createFragmentContainer(Main, {
-  store: graphql`
-    fragment Main_store on Store
-      @argumentDefinitions(limit: { type: "Int", defaultValue: 1 }) {
-      linkConnection(first: $limit) {
-        edges {
-          node {
-            id
-            ...Link_link
-          }
+const Main = () => (
+  <QueryRenderer
+    environment={environment}
+    query={graphql`
+      query MainQuery {
+        store {
+          ...Links_store @arguments(limit: 10)
         }
       }
-    }
-  `
-});
+    `}
+    render={({ error, props }) => {
+      if (error) {
+        return <div>{error.message}</div>;
+      } else if (props) {
+        return <Links store={props.store} />;
+      }
+      return <div>Loading</div>;
+    }}
+  />
+);
+
+Main.propTypes = {
+  store: PropTypes.object
+};
+
+Main.defaultProps = {
+  store: { links: [] }
+};
+
+export default Main;
